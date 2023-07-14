@@ -1,5 +1,4 @@
 # goproxy
-[![Build Status](https://travis-ci.org/ejunjsh/goproxy.svg?branch=master)](https://travis-ci.org/ejunjsh/goproxy)
 
 [![baby-gopher](https://raw.githubusercontent.com/drnic/babygopher-site/gh-pages/images/babygopher-badge.png)](http://www.babygopher.org)
 
@@ -26,7 +25,7 @@ then you can set your proxy address `<local or remote ip>:8090` on your browser 
 
 ## docker
 
-    sudo docker run --net host  sjj050121014/goproxy:1.0 <listen address>
+    docker run --rm --network host epurs/goproxy <listen address>
 
 
 😄 enjoy

@@ -1,10 +1,18 @@
-FROM golang 
+FROM golang:latest as builder
+COPY . /srv/gorpxy
+RUN cd /srv/gorpxy &&\
+    go build -o goproxy &&\
+    ls -l
 
-MAINTAINER ejunjsh <sjj050121014@163.com>
+# 下载证书
+# FROM alpine:latest as ca
+# RUN apk --no-cache add ca-certificates
 
-WORKDIR /root
+#
+FROM scratch
+LABEL source.url="https://github.com/fimreal/gorpxy"
 
-RUN go get github.com/ejunjsh/goproxy
+# COPY --from=ca /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=builder /srv/gorpxy/goproxy /gorpxy
 
-ENTRYPOINT [ "goproxy"]
-
+ENTRYPOINT [ "/goproxy" ]
